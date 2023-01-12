@@ -3,18 +3,6 @@
 
 #include "main_proc.h"
 
-void	ft_env(char **envp, t_shell *env_list)
-{
-	int	c;
-
-	c = -1;
-	env_list->env.current = (char **)malloc(sizeof(char *) * 40000000);
-	while (envp[++c])
-	{
-		env_list->env.current[c] = ft_strdup(envp[c]);
-	}
-}
-
 size_t	ft_strlen(const char *s)
 {
 	int	l;
@@ -44,16 +32,25 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
+//     void ft_cd(int argc, char **argv, char **envp)
+// {
+//     int i;
 
-void ft_cd(int argc, char **argv)
-{
-    int i;
+//     i = -1;
 
-    int s;
-    i = 2;
-    s = chdir(argv[2]);
-    printf("%d", s);
-}
+//     void *oldpwd;
+//     void *pwd;
+
+//     oldpwd = ft_pwd();
+
+//     while(strncmp(envp[++i])
+//         if(strncmp(envp[i], "pwd", 4) == 0)
+
+//     int s;
+//     i = 2;
+//     s = chdir(argv[2]);
+//     printf("%d", s);
+// }
 
 void ft_echo(int argc, char **argv)
 {
@@ -109,17 +106,51 @@ void ft_pwd()
     printf("%s\n", getcwd(h,sizeof(h)));
 }
 
-// void	get_env(char **envp, t_shell *env_list)
-// {
-// 	int	c;
+void ft_env(char **current)
+{
+    int i;
 
-// 	c = -1;
-// 	env_list->env.current = (char **)malloc(sizeof(char *) * 40000000);
-// 	while (envp[++c])
-// 	{
-// 		env_list->env.current[c] = ft_strdup(envp[c]);
-// 	}
+    i = -1;
+
+    while(current[++i])
+    {
+        if(strchr(current[i],'=') != NULL)
+            printf("%s\n", current[i]);
+    }
+}
+
+// void ft_env(t_shell shell)
+// {
+//     int i;
+
+//     i = -1;
+
+//     char *s;
+//     s = *envp;
+
+//     while(envp[++i])
+//     {
+//         if(strchr(envp[i],'=') != NULL)
+//             printf("%s\n", envp[i]);
+//     }
 // }
+
+
+void	get_env(char **envp, t_shell *env_list)
+{
+	int	c;
+    int i;
+
+	c = -1;
+    i = -1;
+    while (envp[++i])
+        ;
+	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
+	while (envp[++c])
+	{
+		env_list->env.current[c] = ft_strdup(envp[c]);
+	}
+}
 
 int main(int argc,char **argv, char **envp)
 {
@@ -136,10 +167,10 @@ int main(int argc,char **argv, char **envp)
     //     ft_exit(&shell);
     if(strncmp(argv[i],"echo",5) == 0)
         ft_echo(argc, argv);
-    if(strncmp(argv[i],"cd",3) == 0)
-        ft_cd(argc, argv);
+    // if(strncmp(argv[i],"cd",3) == 0)
+    //     ft_cd(argc, argv,envp);
     if(strncmp(argv[i],"env",4) == 0)
-        ft_env();
+        ft_env(shell.env.current);
     // {
     //     ft_exit(&shell);
     // }
