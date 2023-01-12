@@ -38,8 +38,8 @@ char	*ft_strdup(const char *s1)
 
 //     i = -1;
 
-//     void *oldpwd;
-//     void *pwd;
+//     char *oldpwd;
+//     char *pwd;
 
 //     oldpwd = ft_pwd();
 
@@ -51,6 +51,8 @@ char	*ft_strdup(const char *s1)
 //     s = chdir(argv[2]);
 //     printf("%d", s);
 // }
+
+
 
 void ft_echo(int argc, char **argv)
 {
@@ -99,11 +101,23 @@ void ft_echo(int argc, char **argv)
 //     // return(0);
 // }
 
-void ft_pwd()
-{
-     char h[1049];
 
-    printf("%s\n", getcwd(h,sizeof(h)));
+// void ft_pwd()
+// {
+//      char h[1049];
+
+//     printf("%s\n", getcwd(h,sizeof(h)));
+// }
+
+
+char *ft_pwd()
+{
+    char *s;
+
+    s=(char *)malloc(100*sizeof(char));
+
+    printf("%s\n", getcwd(s,100));
+    return(s);
 }
 
 void ft_env(char **current)
@@ -119,6 +133,35 @@ void ft_env(char **current)
     }
 }
 
+void ft_cd(int argc, char **argv,char **current)
+{
+    char *oldpwd;
+    char *newpwd;
+    int i;
+    char *name;
+
+    name = "OLDPWD=";
+
+    i = -1;
+    oldpwd = ft_pwd();
+
+    ft_env(current);
+    printf("\n\n\n\n");
+    int s;
+    s = chdir(argv[2]);
+    while(current[++i])
+    {
+        if(strncmp(current[i],"OLDPWD",6) == 0)
+            {
+                current[i] = name;
+                // current[i] = oldpwd;
+                newpwd = ft_pwd();
+            }
+    }
+    printf("%d\n", s);
+    // newpwd = ft_pwd();
+    ft_env(current);
+}
 // void ft_env(t_shell shell)
 // {
 //     int i;
@@ -165,12 +208,14 @@ int main(int argc,char **argv, char **envp)
         ft_pwd();
     // if(strncmp(argv[i],"exit",5) == 0)
     //     ft_exit(&shell);
-    if(strncmp(argv[i],"echo",5) == 0)
+    else if(strncmp(argv[i],"echo",5) == 0)
         ft_echo(argc, argv);
-    // if(strncmp(argv[i],"cd",3) == 0)
-    //     ft_cd(argc, argv,envp);
-    if(strncmp(argv[i],"env",4) == 0)
+    else if(strncmp(argv[i],"cd",3) == 0)
+        ft_cd(argc, argv,shell.env.current);
+    else if(strncmp(argv[i],"env",4) == 0)
         ft_env(shell.env.current);
+    // else
+    //     printf("command not found");
     // {
     //     ft_exit(&shell);
     // }
