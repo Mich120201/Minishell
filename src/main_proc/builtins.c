@@ -139,7 +139,7 @@ int main(int argc,char **argv, char **envp)
     if(strncmp(argv[i],"cd",3) == 0)
         ft_cd(argc, argv);
     if(strncmp(argv[i],"env",4) == 0)
-        ft_env()
+        ft_env();
     // {
     //     ft_exit(&shell);
     // }
