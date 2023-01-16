@@ -32,6 +32,19 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
+void ft_env(char **current)
+{
+    int i;
+
+    i = -1;
+
+    while(current[++i])
+    {
+        if(strchr(current[i],'=') != NULL)
+            printf("%s\n", current[i]);
+    }
+}
+
 //     void ft_cd(int argc, char **argv, char **envp)
 // {
 //     int i;
@@ -109,6 +122,29 @@ void ft_echo(int argc, char **argv)
 //     printf("%s\n", getcwd(h,sizeof(h)));
 // }
 
+void ft_exit(int argc, char **argv,char **current)
+{
+    int i;
+
+    i = -1;
+    
+    ft_env(current);
+    while(current[++i])
+    {
+        if(strncmp(current[i],"SHLVL=2", 8) == 0)
+        {
+            // ft_env(current);
+            printf("kadhiuhd");
+            exit(0);
+        }
+        else
+        {
+            printf("iijdisjdopfd");
+            exit(0);
+        }
+    }
+    exit(0);
+}
 
 char *ft_pwd()
 {
@@ -120,26 +156,13 @@ char *ft_pwd()
     return(s);
 }
 
-void ft_env(char **current)
-{
-    int i;
-
-    i = -1;
-
-    while(current[++i])
-    {
-        if(strchr(current[i],'=') != NULL)
-            printf("%s\n", current[i]);
-    }
-}
-
 void ft_cd(int argc, char **argv,char **current)
 {
     char *oldpwd;
     char *newpwd;
     int i;
     char *name;
-
+    
     name = "OLDPWD=";
 
     i = -1;
@@ -161,6 +184,7 @@ void ft_cd(int argc, char **argv,char **current)
     printf("%d\n", s);
     // newpwd = ft_pwd();
     ft_env(current);
+    
 }
 // void ft_env(t_shell shell)
 // {
@@ -214,6 +238,8 @@ int main(int argc,char **argv, char **envp)
         ft_cd(argc, argv,shell.env.current);
     else if(strncmp(argv[i],"env",4) == 0)
         ft_env(shell.env.current);
+     else if(strncmp(argv[i],"exit",5) == 0)
+        ft_exit(argc,argv,shell.env.current);
     // else
     //     printf("command not found");
     // {
