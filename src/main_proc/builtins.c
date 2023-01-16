@@ -13,6 +13,29 @@ size_t	ft_strlen(const char *s)
 	return (l);
 }
 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	if (s1 && s2)
+	{
+		str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+		if (!str)
+			return (NULL);
+		i = 0;
+		j = 0;
+		while (s1[i])
+			str[j++] = s1[i++];
+		i = 0;
+		while (s2[i])
+			str[j++] = s2[i++];
+		str[j] = 0;
+		return (str);
+	}
+	return (0);
+}
 
 char	*ft_strdup(const char *s1)
 {
@@ -125,25 +148,24 @@ void ft_echo(int argc, char **argv)
 void ft_exit(int argc, char **argv,char **current)
 {
     int i;
+    int j;
 
     i = -1;
-    
+    j = -1;
+
     ft_env(current);
     while(current[++i])
     {
-        if(strncmp(current[i],"SHLVL=2", 8) == 0)
+        if(strncmp(current[i],"SHLVL=", 6) == 0)
         {
-            // ft_env(current);
-            printf("kadhiuhd");
-            exit(0);
-        }
-        else
-        {
-            printf("iijdisjdopfd");
+            j = current[i][6] - '0';
+            j--;
+            j += '0';
+            //j = current[i][6] + '0';
+            current[i][6] = j;
             exit(0);
         }
     }
-    exit(0);
 }
 
 char *ft_pwd()
@@ -159,7 +181,7 @@ char *ft_pwd()
 void ft_cd(int argc, char **argv,char **current)
 {
     char *oldpwd;
-    char *newpwd;
+    char *pwd;
     int i;
     char *name;
     
@@ -176,9 +198,9 @@ void ft_cd(int argc, char **argv,char **current)
     {
         if(strncmp(current[i],"OLDPWD",6) == 0)
             {
-                current[i] = name;
+                pwd = ft_strjoin(name, oldpwd);
+                printf("%s", pwd);
                 // current[i] = oldpwd;
-                newpwd = ft_pwd();
             }
     }
     printf("%d\n", s);
@@ -240,6 +262,8 @@ int main(int argc,char **argv, char **envp)
         ft_env(shell.env.current);
      else if(strncmp(argv[i],"exit",5) == 0)
         ft_exit(argc,argv,shell.env.current);
+     else if(strncmp(argv[i],"export",7) == 0)
+        ft_export(argc, argv);
     // else
     //     printf("command not found");
     // {
