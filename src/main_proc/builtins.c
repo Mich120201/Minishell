@@ -208,6 +208,30 @@ void ft_cd(int argc, char **argv,char **current)
     ft_env(current);
     
 }
+
+void    ft_export(int argc, char **argv,char **current)
+{
+    int i;
+    int j;
+
+    i = -1;
+    j = -1;
+    ft_env(current);
+    while(current[i])
+    {
+        while(current[i][j] == '\0')
+        {
+            printf("%s\n", current[i]);
+            i++;
+            current[i] = (char *)malloc(sizeof(char) * ft_strlen(current[i]) + 1);
+            current[i] = argv[2];
+            ft_env(current);
+            return ;
+        }
+        ++j;
+    }
+    ++i;
+}
 // void ft_env(t_shell shell)
 // {
 //     int i;
@@ -241,6 +265,7 @@ void	get_env(char **envp, t_shell *env_list)
 	}
 }
 
+
 int main(int argc,char **argv, char **envp)
 {
     int i;
@@ -263,7 +288,7 @@ int main(int argc,char **argv, char **envp)
      else if(strncmp(argv[i],"exit",5) == 0)
         ft_exit(argc,argv,shell.env.current);
      else if(strncmp(argv[i],"export",7) == 0)
-        ft_export(argc, argv);
+        ft_export(argc, argv, shell.env.current);
     // else
     //     printf("command not found");
     // {
