@@ -226,20 +226,12 @@ void    ft_export(int argc, char **argv,char **current)
     i = -1;
     j = -1;
     ft_env(current);
-    while(current[i])
-    {
-        while(current[i][j] == '\0')
-        {
-            printf("%s\n", current[i]);
-            i++;
-            current[i] = (char *)malloc(sizeof(char) * ft_strlen(current[i]) + 1);
-            current[i] = argv[2];
-            ft_env(current);
-            return ;
-        }
-        ++j;
-    }
-    ++i;
+    while(current[++i])
+        ;
+    current[i] = ft_strdup(argv[2]);
+    current[i + 1] = NULL;
+    ft_env(current);
+    return ;
 }
 // void ft_env(t_shell shell)
 // {
@@ -267,7 +259,7 @@ void	get_env(char **envp, t_shell *env_list)
     i = -1;
     while (envp[++i])
         ;
-	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
+	env_list->env.current = (char **)malloc(sizeof(char *) * 4000000000000);
 	while (envp[++c])
 	{
 		env_list->env.current[c] = ft_strdup(envp[c]);
