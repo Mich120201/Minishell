@@ -221,10 +221,8 @@ void ft_cd(int argc, char **argv,char **current)
 void    ft_export(int argc, char **argv,char **current)
 {
     int i;
-    int j;
 
     i = -1;
-    j = -1;
     ft_env(current);
     while(current[++i])
         ;
@@ -233,6 +231,29 @@ void    ft_export(int argc, char **argv,char **current)
     ft_env(current);
     return ;
 }
+
+void        ft_unset(int argc, char **argv,char **current)
+{
+    int i;
+
+    i = -1;
+    ft_env(current);
+    while(current[++i])
+    {
+        if(strncmp(current[i],argv[2],strlen(argv[2])) == 0)
+        {
+            printf("ciaoooooo\n\n\n\n\n");
+            while (current[i])
+            {
+                free(current[i]);
+                current[i] = ft_strdup(current[i + 1]);
+                i++;
+            }
+            break ;
+        }
+    }
+}
+
 // void ft_env(t_shell shell)
 // {
 //     int i;
@@ -289,6 +310,8 @@ int main(int argc,char **argv, char **envp)
      else if(strncmp(argv[i],"exit",5) == 0)
         ft_exit(argc,argv,shell.env.current);
      else if(strncmp(argv[i],"export",7) == 0)
+        ft_export(argc, argv, shell.env.current);
+    else if(strncmp(argv[i],"unset",6) == 0)
         ft_export(argc, argv, shell.env.current);
     // else
     //     printf("command not found");
