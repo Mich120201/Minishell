@@ -184,6 +184,9 @@ void ft_cd(int argc, char **argv,char **current)
     char *pwd;
     int i;
     char *name;
+    char *pwd2;
+
+    pwd2 = "PWD=";
     
     name = "OLDPWD=";
 
@@ -200,10 +203,16 @@ void ft_cd(int argc, char **argv,char **current)
             {
                 pwd = ft_strjoin(name, oldpwd);
                 printf("%s", pwd);
-                // current[i] = oldpwd;
+                current[i] = pwd;
             }
+        if(strncmp(current[i],"PWD",3) == 0)
+        {
+            pwd2 = ft_strjoin(pwd2, ft_pwd());
+            current[i] = pwd2;
+        }
     }
-    printf("%d\n", s);
+
+    printf("\n\n\n\n%d\n", s);
     // newpwd = ft_pwd();
     ft_env(current);
     
