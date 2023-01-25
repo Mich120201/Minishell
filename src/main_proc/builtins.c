@@ -222,14 +222,48 @@ void ft_cd(int argc, char **argv,char **current)
     
 }
 
+char	**sort(char **sorting)
+{
+	int		i;
+	int		j;
+	int		c;
+	char	**sort_env;
+
+	i = 0;
+	while (sorting[i])
+		++i;
+	sort_env = malloc(sizeof(char *) * (i + 1));
+	sort_env[i] = NULL;
+	i = -1;
+	while (sorting[++i])
+	{
+		j = -1;
+		c = 0;
+		while (sorting[++j])
+			if (ft_strncmp(sorting[i], sorting[j], ft_strlen(sorting[i])) > 0)
+				c++;
+		sort_env[c] = sorting[i];
+	}
+	return (sort_env);
+}
+
 void    ft_export(int argc, char **argv,char **current)
 {
-    int i;
-    int j;
-    int position;
+    int     i;
+    int     j;
+    int     position;
+    char	**sort_env;
 
     i = -1;
     j = -1;
+    if (argc == 2)
+    {
+        printf("ciao\n");
+        sort_env = sort(current);
+		i = -1;
+		while (sort_env[++i])
+			printf("declare -x %s\n", sort_env[i]);
+    }
     while(current[++i])
     {
         position = ft_strchrp(current[i], '=');
@@ -244,7 +278,6 @@ void    ft_export(int argc, char **argv,char **current)
         current[i] = argv[2];
         current[i + 1] = NULL;
     }
-    ft_env(current);
     return ;
 }
 
