@@ -119,28 +119,6 @@ void ft_env(char **current)
     }
 }
 
-//     void ft_cd(int argc, char **argv, char **envp)
-// {
-//     int i;
-
-//     i = -1;
-
-//     char *oldpwd;
-//     char *pwd;
-
-//     oldpwd = ft_pwd();
-
-//     while(strncmp(envp[++i])
-//         if(strncmp(envp[i], "pwd", 4) == 0)
-
-//     int s;
-//     i = 2;
-//     s = chdir(argv[2]);
-//     printf("%d", s);
-// }
-
-
-
 void ft_echo(int argc, char **argv)
 {
     int i;
@@ -175,27 +153,6 @@ void ft_echo(int argc, char **argv)
     }
 }
 
-// int ft_exit(t_shell *shell)
-// {
-
-//     printf("exit");
-//     return(0);
-//     // int i;
-
-//     // i = -1;
-//     // while(shell->env.current)
-//     // printf("%s[i]\n", shell->env.current);
-//     // return(0);
-// }
-
-
-// void ft_pwd()
-// {
-//      char h[1049];
-
-//     printf("%s\n", getcwd(h,sizeof(h)));
-// }
-
 void ft_exit(int argc, char **argv,char **current)
 {
     int i;
@@ -212,7 +169,6 @@ void ft_exit(int argc, char **argv,char **current)
             j = current[i][6] - '0';
             j--;
             j += '0';
-            //j = current[i][6] + '0';
             current[i][6] = j;
             exit(0);
         }
@@ -264,7 +220,6 @@ void ft_cd(int argc, char **argv,char **current)
     }
 
     printf("\n\n\n\n%d\n", s);
-    // newpwd = ft_pwd();
     ft_env(current);
     
 }
@@ -277,33 +232,20 @@ void    ft_export(int argc, char **argv,char **current)
 
     i = -1;
     j = -1;
-    // ft_env(current);
     while(current[++i])
     {
         position = ft_strchrp(current[i], '=');
-        // printf("%d\n", position);
-        // while(ft_strchr(&current[i][++j], "=", 1) > 0)
-        //     ;
-        // printf("%d\n", j);
-        // j = 10;
         if (ft_strncmp(current[i], argv[2], position + 1) == 0)
         {
-            // printf("%s\n", current[i]);
-            // printf("%s\n", argv[2]);
             current[i] = argv[2];
             j = 0;
         }
     }
-    // i = -1;
-    // while(current[++i])
-    //     ;
-    // if (ft_strncmp(current[i], argv[2], position + 1) == 0)
-    // {
     if(j == -1)
     {
-        arr_add_back(current, argv[2]);
+        current[i] = argv[2];
+        current[i + 1] = NULL;
     }
-    // }
     ft_env(current);
     return ;
 }
@@ -325,42 +267,7 @@ void        ft_unset(int argc, char **argv,char **current)
         }
         break ;
     }
-    // int i;
-
-    // i = -1;
-    // ft_env(current);
-    // while(current[++i])
-    // {
-    //     if(strncmp(current[i],argv[2],strlen(argv[2])) == 0)
-    //     {
-    //         printf("ciaoooooo\n\n\n\n\n");
-    //         while (current[i])
-    //         {
-    //             free(current[i]);
-    //             current[i] = ft_strdup(current[i + 1]);
-    //             i++;
-    //         }
-    //         break ;
-    //     }
-    // }
 }
-
-// void ft_env(t_shell shell)
-// {
-//     int i;
-
-//     i = -1;
-
-//     char *s;
-//     s = *envp;
-
-//     while(envp[++i])
-//     {
-//         if(strchr(envp[i],'=') != NULL)
-//             printf("%s\n", envp[i]);
-//     }
-// }
-
 
 void	get_env(char **envp, t_shell *env_list)
 {
@@ -371,7 +278,7 @@ void	get_env(char **envp, t_shell *env_list)
     i = -1;
     while (envp[++i])
         ;
-	env_list->env.current = (char **)malloc(sizeof(char *) * 4000000000000);
+	env_list->env.current = (char **)malloc(sizeof(char *) * 400000);
 	while (envp[++c])
 	{
 		env_list->env.current[c] = ft_strdup(envp[c]);
@@ -388,27 +295,20 @@ int main(int argc,char **argv, char **envp)
     i = -1;
     while(argv[++i])
     {
-    if(strncmp(argv[i],"pwd",4) == 0)
-        ft_pwd();
-    // if(strncmp(argv[i],"exit",5) == 0)
-    //     ft_exit(&shell);
-    else if(strncmp(argv[i],"echo",5) == 0)
-        ft_echo(argc, argv);
-    else if(strncmp(argv[i],"cd",3) == 0)
-        ft_cd(argc, argv,shell.env.current);
-    else if(strncmp(argv[i],"env",4) == 0)
-        ft_env(shell.env.current);
-     else if(strncmp(argv[i],"exit",5) == 0)
-        ft_exit(argc,argv,shell.env.current);
-     else if(strncmp(argv[i],"export",7) == 0)
-        ft_export(argc, argv, shell.env.current);
-    else if(strncmp(argv[i],"unset",6) == 0)
-        ft_unset(argc, argv, shell.env.current);
-    // else
-    //     printf("command not found");
-    // {
-    //     ft_exit(&shell);
-    // }
+        if(strncmp(argv[i],"pwd",4) == 0)
+            ft_pwd();
+        else if(strncmp(argv[i],"echo",5) == 0)
+            ft_echo(argc, argv);
+        else if(strncmp(argv[i],"cd",3) == 0)
+            ft_cd(argc, argv,shell.env.current);
+        else if(strncmp(argv[i],"env",4) == 0)
+            ft_env(shell.env.current);
+        else if(strncmp(argv[i],"exit",5) == 0)
+            ft_exit(argc,argv,shell.env.current);
+        else if(strncmp(argv[i],"export",7) == 0)
+            ft_export(argc, argv, shell.env.current);
+        else if(strncmp(argv[i],"unset",6) == 0)
+            ft_unset(argc, argv, shell.env.current);
     }
     return(0);
 }
