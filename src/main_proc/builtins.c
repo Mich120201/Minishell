@@ -3,6 +3,57 @@
 
 #include "main_proc.h"
 
+int	ft_strchrp(const char *s, int c)
+{
+	char	find;
+	int		i;
+
+	find = (unsigned char)c;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == find)
+			return (i);
+		i++;
+	}
+	if (s[i] == find)
+		return (i);
+	return (1);
+}
+
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*b1;
+	unsigned char	*b2;
+
+	b1 = (unsigned char *)s1;
+	b2 = (unsigned char *)s2;
+	i = 0;
+	while (n--)
+	{
+		if (b1[i] != b2[i] || b1[i] == 0 || b2[i] == 0)
+			return (b1[i] - b2[i]);
+		i++;
+	}
+	return (0);
+}
+
+void	arr_add_back(char **env, char *copy)
+{
+	int	i;
+	int	l;
+
+	i = -1;
+	while (env[++i])
+		;
+	l = i + 1;
+	env = (char **)realloc(env, l);
+	env[i] = ft_strdup(copy);
+	env[l] = NULL;
+}
+
 size_t	ft_strlen(const char *s)
 {
 	int	l;
@@ -221,37 +272,77 @@ void ft_cd(int argc, char **argv,char **current)
 void    ft_export(int argc, char **argv,char **current)
 {
     int i;
+    int j;
+    int position;
 
     i = -1;
-    ft_env(current);
+    j = -1;
+    // ft_env(current);
     while(current[++i])
-        ;
-    current[i] = ft_strdup(argv[2]);
-    current[i + 1] = NULL;
+    {
+        position = ft_strchrp(current[i], '=');
+        // printf("%d\n", position);
+        // while(ft_strchr(&current[i][++j], "=", 1) > 0)
+        //     ;
+        // printf("%d\n", j);
+        // j = 10;
+        if (ft_strncmp(current[i], argv[2], position + 1) == 0)
+        {
+            // printf("%s\n", current[i]);
+            // printf("%s\n", argv[2]);
+            current[i] = argv[2];
+            j = 0;
+        }
+    }
+    // i = -1;
+    // while(current[++i])
+    //     ;
+    // if (ft_strncmp(current[i], argv[2], position + 1) == 0)
+    // {
+    if(j == -1)
+    {
+        arr_add_back(current, argv[2]);
+    }
+    // }
     ft_env(current);
     return ;
 }
 
 void        ft_unset(int argc, char **argv,char **current)
-{
+{   
     int i;
+    int position;
 
     i = -1;
-    ft_env(current);
     while(current[++i])
     {
-        if(strncmp(current[i],argv[2],strlen(argv[2])) == 0)
+        position = ft_strchrp(current[i], '=');
+        if (ft_strncmp(current[i], argv[2], position + 1) == 0)
         {
-            printf("ciaoooooo\n\n\n\n\n");
-            while (current[i])
-            {
                 free(current[i]);
                 current[i] = ft_strdup(current[i + 1]);
                 i++;
-            }
-            break ;
         }
+        break ;
     }
+    // int i;
+
+    // i = -1;
+    // ft_env(current);
+    // while(current[++i])
+    // {
+    //     if(strncmp(current[i],argv[2],strlen(argv[2])) == 0)
+    //     {
+    //         printf("ciaoooooo\n\n\n\n\n");
+    //         while (current[i])
+    //         {
+    //             free(current[i]);
+    //             current[i] = ft_strdup(current[i + 1]);
+    //             i++;
+    //         }
+    //         break ;
+    //     }
+    // }
 }
 
 // void ft_env(t_shell shell)
@@ -312,7 +403,7 @@ int main(int argc,char **argv, char **envp)
      else if(strncmp(argv[i],"export",7) == 0)
         ft_export(argc, argv, shell.env.current);
     else if(strncmp(argv[i],"unset",6) == 0)
-        ft_export(argc, argv, shell.env.current);
+        ft_unset(argc, argv, shell.env.current);
     // else
     //     printf("command not found");
     // {
