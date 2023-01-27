@@ -16,7 +16,6 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-
 int	ft_strchrp(const char *s, int c)
 {
 	char	find;
@@ -34,7 +33,6 @@ int	ft_strchrp(const char *s, int c)
 		return (i);
 	return (1);
 }
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -120,120 +118,113 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
-void ft_env(char **current)
+void	ft_env(char **current)
 {
-    int i;
+	int	i;
 
-    i = -1;
-
-    while(current[++i])
-    {
-        if(strchr(current[i],'=') != NULL)
-            printf("%s\n", current[i]);
-    }
+	i = -1;
+	while (current[++i])
+	{
+		if (strchr(current[i], '=') != NULL)
+			printf("%s\n", current[i]);
+	}
 }
 
-void ft_echo(int argc, char **argv)
+void	ft_echo(int argc, char **argv)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 2;
-    j = 0;
-    while (j < 1)
-    {
-        if (argc == 2)
-            printf("\n");
-        else if(strncmp(argv[i], "-n", 3) == 0)
-        {
-            i++;
-           while((strncmp(argv[i], "-n", 3) == 0))
-                    i++;
-               while(argv[i])
-                {
-                    printf("%s ", argv[i]);
-                    i++;
-                } 
-        }
-        else
-        {
-            while(argv[i])
-            {
-                printf("%s\n", argv[i]);
-                i++;
-            } 
-        }
-        j++;
-    }
+	i = 2;
+	j = 0;
+	while (j < 1)
+	{
+		if (argc == 2)
+			printf("\n");
+		else if (strncmp(argv[i], "-n", 3) == 0)
+		{
+			i++;
+			while ((strncmp(argv[i], "-n", 3) == 0))
+					i++;
+			while (argv[i])
+			{
+				printf("%s", argv[i]);
+				i++;
+			}
+		}
+		else
+		{
+			while (argv[i])
+			{
+				printf("%s\n", argv[i]);
+				i++;
+			}
+		}
+		j++;
+	}
 }
 
-void ft_exit(int argc, char **argv,char **current)
+void	ft_exit(int argc, char **argv, char **current)
 {
-    int i;
-    int j;
+	int		i;
+	int		j;
 
-    i = -1;
-    j = -1;
-
-    ft_env(current);
-    while(current[++i])
-    {
-        if(strncmp(current[i],"SHLVL=", 6) == 0)
-        {
-            j = current[i][6] - '0';
-            j--;
-            j += '0';
-            current[i][6] = j;
-            exit(0);
-        }
-    }
+	i = -1;
+	j = -1;
+	ft_env(current);
+	while (current[++i])
+	{
+		if (strncmp(current[i], "SHLVL=", 6) == 0)
+		{
+			j = current[i][6] - '0';
+			j--;
+			j += '0';
+			current[i][6] = j;
+			exit(0);
+		}
+	}
 }
 
-char *ft_pwd()
+char	*ft_pwd(void)
 {
-    char *s;
+	char	*s;
 
-    s=(char *)malloc(100*sizeof(char));
-
-    printf("%s\n", getcwd(s,100));
-    return(s);
+	s = (char *)malloc(100 * sizeof(char));
+	printf("%s\n", getcwd(s, 100));
+	return (s);
 }
 
-void ft_cd(int argc, char **argv,char **current)
+void	ft_cd(int argc, char **argv, char **current)
 {
-    char *oldpwd;
-    char *pwd;
-    int i;
-    char *name;
-    char *pwd2;
+	char		*oldpwd;
+	char		*pwd;
+	int			i;
+	char		*name;
+	char		*pwd2;
+	int			s;
 
-    pwd2 = "PWD=";
-        
-    name = "OLDPWD=";
-
-    i = -1;
-    oldpwd = ft_pwd();
-
-    ft_env(current);
-    printf("\n\n\n\n");
-    int s;
-    s = chdir(argv[2]);
-    while(current[++i])
-    {
-        if(strncmp(current[i],"OLDPWD",6) == 0)
-            {
-                pwd = ft_strjoin(name, oldpwd);
-                current[i] = pwd;
-            }
-        if(strncmp(current[i],"PWD",3) == 0)
-        {
-            pwd2 = ft_strjoin(pwd2, ft_pwd());
-            current[i] = pwd2;
-        }
-    }
-    printf("\n\n\n\n%d\n", s);
-    ft_env(current);
-        
+	pwd2 = "PWD=";
+	name = "OLDPWD=";
+	i = -1;
+	oldpwd = ft_pwd();
+	ft_env(current);
+	printf("\n\n\n\n");
+	s = chdir(argv[2]);
+	while (current[++i])
+	{
+		if (strncmp(current[i], "OLDPWD", 6) == 0)
+		{
+				pwd = ft_strjoin(name, oldpwd);
+				current[i] = pwd;
+		}
+		if (strncmp(current[i], "PWD", 3) == 0)
+		{
+			pwd2 = ft_strjoin(pwd2, ft_pwd());
+			current[i] = pwd2;
+		}
+	}
+	printf("\n\n\n\n%d\n", s);
+	ft_env(current);
 }
 
 char	**sort(char **sorting)
@@ -261,71 +252,71 @@ char	**sort(char **sorting)
 	return (sort_env);
 }
 
-void    ft_export(int argc, char **argv,char **current)
+void	ft_export(int argc, char **argv, char **current)
 {
-    int  i;
-    int  j;
-    int  position;
-    char	**sort_env;
+	int				i;
+	int				j;
+	int				position;
+	char			**sort_env;
 
-    i = -1;
-    j = -1;
-    ft_env(current);
-    if (argc == 2)
-    {
-        //printf("ciao\n");
-        sort_env = sort(current);
+	i = -1;
+	j = -1;
+	ft_env(current);
+	if (argc == 2)
+	{
+		//printf("ciao\n");
+		sort_env = sort(current);
 		i = -1;
 		while (sort_env[++i])
 			printf("declare -x %s\n", sort_env[i]);
-    }
-    while(current[++i])
-    {
-        position = ft_strchrp(current[i], '=');
-        if (ft_strncmp(current[i], argv[2], position + 1) == 0)
-        {
-            current[i] = argv[2];
-            j = 0;
-        }
-    }
-    if(j == -1)
-    {
-        current[i] = argv[2];
-        current[i + 1] = NULL;
-    }
-    ft_env(current);
-    return ;
+	}
+	while (current[++i])
+	{
+		position = ft_strchrp(current[i], '=');
+		if (ft_strncmp(current[i], argv[2], position + 1) == 0)
+		{
+			current[i] = argv[2];
+			j = 0;
+		}
+	}
+	if (j == -1)
+	{
+		current[i] = argv[2];
+		current[i + 1] = NULL;
+	}
+	ft_env(current);
+	return ;
 }
 
-void       ft_unset(int argc, char **argv,char **current)
-{   
-    int i;
-    int position;
+void	ft_unset(int argc, char **argv, char **current)
+{
+	int			i;
+	int			position;
 
-    i = -1;
-    ft_env(current);
-    while(current[++i])
-    {
-        position = ft_strchrp(current[i], '=');
-        if (ft_strncmp(current[i], argv[2], position) == 0)
-        {
-                free(current[i]);
-                current[i] = (current[i + 1]);
-                i++;
-        }
-    }
-    ft_env(current);
+	i = -1;
+	ft_env(current);
+	while (current[++i])
+	{
+		position = ft_strchrp(current[i], '=');
+		if (ft_strncmp(current[i], argv[2], position) == 0)
+		{
+			free(current[i]);
+			current[i] = (current[i + 1]);
+			i++;
+		}
+	}
+	ft_env(current);
 }
 
 void	get_env(char **envp, t_shell *env_list)
 {
 	int	c;
-    int i;
+	int	i;
 
 	c = -1;
-    i = -1;
-    while (envp[++i])
-        ;
+	i = -1;
+	while (envp[++i])
+		;
 	env_list->env.current = (char **)malloc(sizeof(char *) * 400000);
 	while (envp[++c])
 	{
@@ -333,30 +324,29 @@ void	get_env(char **envp, t_shell *env_list)
 	}
 }
 
-
-int main(int argc,char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-    int i;
-    t_shell shell;
+	int			i;
+	t_shell		shell;
 
-    get_env(envp, &shell);
-    i = -1;
-    while(argv[++i])
-    {
-        if(strncmp(argv[i],"pwd",4) == 0)
-            ft_pwd();
-        else if(strncmp(argv[i],"echo",5) == 0)
-            ft_echo(argc, argv);
-        else if(strncmp(argv[i],"cd",3) == 0)
-            ft_cd(argc, argv,shell.env.current);
-        else if(strncmp(argv[i],"env",4) == 0)
-            ft_env(shell.env.current);
-        else if(strncmp(argv[i],"exit",5) == 0)
-            ft_exit(argc,argv,shell.env.current);
-        else if(strncmp(argv[i],"export",7) == 0)
-            ft_export(argc, argv, shell.env.current);
-        else if(strncmp(argv[i],"unset",6) == 0)
-            ft_unset(argc, argv, shell.env.current);
-    }
-    return(0);
+	get_env(envp, &shell);
+	i = -1;
+	while (argv[++i])
+	{
+		if (strncmp(argv[i], "pwd", 4) == 0)
+			ft_pwd();
+		else if (strncmp(argv[i], "echo", 5) == 0)
+			ft_echo(argc, argv);
+		else if (strncmp(argv[i], "cd", 3) == 0)
+			ft_cd(argc, argv, shell.env.current);
+		else if (strncmp(argv[i], "env", 4) == 0)
+			ft_env(shell.env.current);
+		else if (strncmp(argv[i], "exit", 5) == 0)
+			ft_exit(argc, argv, shell.env.current);
+		else if (strncmp(argv[i], "export", 7) == 0)
+			ft_export(argc, argv, shell.env.current);
+		else if (strncmp(argv[i], "unset", 6) == 0)
+			ft_unset (argc, argv, shell.env.current);
+	}
+	return (0);
 }
