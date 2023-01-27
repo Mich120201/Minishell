@@ -3,6 +3,20 @@
 
 #include "main_proc.h"
 
+void	*ft_memset(void *b, int c, size_t len)
+{
+	char	*p;
+
+	p = (char *)b;
+	while (len > 0)
+	{
+		p[len - 1] = c;
+		len--;
+	}
+	return (b);
+}
+
+
 int	ft_strchrp(const char *s, int c)
 {
 	char	find;
@@ -133,7 +147,7 @@ void ft_echo(int argc, char **argv)
         else if(strncmp(argv[i], "-n", 3) == 0)
         {
             i++;
-               while((strncmp(argv[i], "-n", 3) == 0))
+           while((strncmp(argv[i], "-n", 3) == 0))
                     i++;
                while(argv[i])
                 {
@@ -194,7 +208,7 @@ void ft_cd(int argc, char **argv,char **current)
     char *pwd2;
 
     pwd2 = "PWD=";
-    
+        
     name = "OLDPWD=";
 
     i = -1;
@@ -219,7 +233,7 @@ void ft_cd(int argc, char **argv,char **current)
     }
     printf("\n\n\n\n%d\n", s);
     ft_env(current);
-    
+        
 }
 
 char	**sort(char **sorting)
@@ -249,16 +263,17 @@ char	**sort(char **sorting)
 
 void    ft_export(int argc, char **argv,char **current)
 {
-    int     i;
-    int     j;
-    int     position;
+    int  i;
+    int  j;
+    int  position;
     char	**sort_env;
 
     i = -1;
     j = -1;
+    ft_env(current);
     if (argc == 2)
     {
-        printf("ciao\n");
+        //printf("ciao\n");
         sort_env = sort(current);
 		i = -1;
 		while (sort_env[++i])
@@ -278,26 +293,28 @@ void    ft_export(int argc, char **argv,char **current)
         current[i] = argv[2];
         current[i + 1] = NULL;
     }
+    ft_env(current);
     return ;
 }
 
-void        ft_unset(int argc, char **argv,char **current)
+void       ft_unset(int argc, char **argv,char **current)
 {   
     int i;
     int position;
 
     i = -1;
+    ft_env(current);
     while(current[++i])
     {
         position = ft_strchrp(current[i], '=');
-        if (ft_strncmp(current[i], argv[2], position + 1) == 0)
+        if (ft_strncmp(current[i], argv[2], position) == 0)
         {
                 free(current[i]);
-                current[i] = ft_strdup(current[i + 1]);
+                current[i] = (current[i + 1]);
                 i++;
         }
-        break ;
     }
+    ft_env(current);
 }
 
 void	get_env(char **envp, t_shell *env_list)
