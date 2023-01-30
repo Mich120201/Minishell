@@ -130,37 +130,39 @@ void	ft_env(char **current)
 	}
 }
 
-void	ft_echo(int argc, char **argv)
+void	short_echo(char **argv, t_shell shell)
 {
-	int	i;
-	int	j;
+	while (argv[shell.echo.i])
+	{
+		printf("%s\n", argv[shell.echo.i]);
+		shell.echo.i++;
+	}
+}
 
-	i = 2;
-	j = 0;
-	while (j < 1)
+void	ft_echo(int argc, char **argv, t_shell shell)
+{
+	shell.echo.i = 2;
+	shell.echo.j = 0;
+	while (shell.echo.j < 1)
 	{
 		if (argc == 2)
 			printf("\n");
-		else if (strncmp(argv[i], "-n", 3) == 0)
+		else if (strncmp(argv[shell.echo.i], "-n", 3) == 0)
 		{
-			i++;
-			while ((strncmp(argv[i], "-n", 3) == 0))
-					i++;
-			while (argv[i])
+			shell.echo.i++;
+			while ((strncmp(argv[shell.echo.i], "-n", 3) == 0))
+					shell.echo.i++;
+			while (argv[shell.echo.i])
 			{
-				printf("%s", argv[i]);
-				i++;
+				printf("%s", argv[shell.echo.i]);
+				shell.echo.i++;
 			}
 		}
 		else
 		{
-			while (argv[i])
-			{
-				printf("%s\n", argv[i]);
-				i++;
-			}
+			short_echo(argv, shell);
 		}
-		j++;
+		shell.echo.j++;
 	}
 }
 
@@ -194,37 +196,31 @@ char	*ft_pwd(void)
 	return (s);
 }
 
-void	ft_cd(int argc, char **argv, char **current)
-{
-	char		*oldpwd;
-	char		*pwd;
-	int			i;
-	char		*name;
-	char		*pwd2;
-	int			s;
+// void	change_pwd()
+// {
 
-	pwd2 = "PWD=";
-	name = "OLDPWD=";
-	i = -1;
-	oldpwd = ft_pwd();
-	ft_env(current);
-	printf("\n\n\n\n");
-	s = chdir(argv[2]);
-	while (current[++i])
+// }
+void	ft_cd(int argc, char **argv, t_shell shell)
+{
+	shell.cd.i = -1;
+	ft_env(shell.env.current);
+	printf("\n\n\n\n\n");
+	shell.cd.oldpwd = ft_pwd();
+	shell.cd.s = chdir(argv[2]);
+	while (shell.env.current[++shell.cd.i])
 	{
-		if (strncmp(current[i], "OLDPWD", 6) == 0)
+		if (strncmp(shell.env.current[shell.cd.i], "OLDPWD", 6) == 0)
 		{
-				pwd = ft_strjoin(name, oldpwd);
-				current[i] = pwd;
+				shell.cd.pwd = ft_strjoin("OLDPWD=", shell.cd.oldpwd);
+				shell.env.current[shell.cd.i] = shell.cd.pwd;
 		}
-		if (strncmp(current[i], "PWD", 3) == 0)
+		if (strncmp(shell.env.current[shell.cd.i], "PWD", 3) == 0)
 		{
-			pwd2 = ft_strjoin(pwd2, ft_pwd());
-			current[i] = pwd2;
+			shell.cd.pwd2 = ft_strjoin("PWD=", ft_pwd());
+			shell.env.current[shell.cd.i] = shell.cd.pwd2;
 		}
 	}
-	printf("\n\n\n\n%d\n", s);
-	ft_env(current);
+	ft_env(shell.env.current);
 }
 
 char	**sort(char **sorting)
@@ -252,39 +248,32 @@ char	**sort(char **sorting)
 	return (sort_env);
 }
 
-void	ft_export(int argc, char **argv, char **current)
+void	ft_export(int argc, char **argv, t_shell shell)
 {
-	int				i;
-	int				j;
-	int				position;
-	char			**sort_env;
-
-	i = -1;
-	j = -1;
-	ft_env(current);
+	shell.exp.i = -1;
+	shell.exp.j = -1;
 	if (argc == 2)
 	{
-		//printf("ciao\n");
-		sort_env = sort(current);
-		i = -1;
-		while (sort_env[++i])
-			printf("declare -x %s\n", sort_env[i]);
+		shell.exp.sort_env = sort(shell.env.current);
+		shell.exp.i = -1;
+		while (shell.exp.sort_env[++shell.exp.i])
+			printf("declare -x %s\n", shell.exp.sort_env[shell.exp.i]);
 	}
-	while (current[++i])
+	while (shell.env.current[++shell.exp.i])
 	{
-		position = ft_strchrp(current[i], '=');
-		if (ft_strncmp(current[i], argv[2], position + 1) == 0)
+		shell.exp.pos = ft_strchrp(shell.env.current[shell.exp.i], '=');
+		if (ft_strncmp(shell.env.current[shell.exp.i], \
+					argv[2], shell.exp.pos + 1) == 0)
 		{
-			current[i] = argv[2];
-			j = 0;
+			shell.env.current[shell.exp.i] = argv[2];
+			shell.exp.j = 0;
 		}
 	}
-	if (j == -1)
+	if (shell.exp.j == -1)
 	{
-		current[i] = argv[2];
-		current[i + 1] = NULL;
+		shell.env.current[shell.exp.i] = argv[2];
+		shell.env.current[shell.exp.i + 1] = NULL;
 	}
-	ft_env(current);
 	return ;
 }
 
@@ -336,15 +325,15 @@ int	main(int argc, char **argv, char **envp)
 		if (strncmp(argv[i], "pwd", 4) == 0)
 			ft_pwd();
 		else if (strncmp(argv[i], "echo", 5) == 0)
-			ft_echo(argc, argv);
+			ft_echo(argc, argv, shell);
 		else if (strncmp(argv[i], "cd", 3) == 0)
-			ft_cd(argc, argv, shell.env.current);
+			ft_cd(argc, argv, shell);
 		else if (strncmp(argv[i], "env", 4) == 0)
 			ft_env(shell.env.current);
 		else if (strncmp(argv[i], "exit", 5) == 0)
 			ft_exit(argc, argv, shell.env.current);
 		else if (strncmp(argv[i], "export", 7) == 0)
-			ft_export(argc, argv, shell.env.current);
+			ft_export(argc, argv, shell);
 		else if (strncmp(argv[i], "unset", 6) == 0)
 			ft_unset (argc, argv, shell.env.current);
 	}
