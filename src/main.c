@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:34:23 by mich             ###   ########.fr       */
+/*   Updated: 2023/01/31 17:05:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,9 @@ int	check_error_cod(t_shell *shell)
 	int	i;
 
 	i = -1;
-	printf("ciaooo\n");
 	shell->lst.error = ft_split(shell->lst.input, ' ');
-	printf("%s\n", shell->lst.error[0]);
 	while (shell->lst.error[++i])
 	{
-		printf("ciaooo\n");
 		if (ft_strncmp(shell->lst.error[i], "$?", 3) == 0)
 		{
 			printf("%d: command not found\n", g_exit);
@@ -53,7 +50,6 @@ int	check_error_cod(t_shell *shell)
 		}
 		else
 		{
-			printf("ciaooo\n");
 			g_exit = 0;
 			g_exit = parse(shell->lst.split);
 		}
@@ -97,9 +93,6 @@ int	main(int argc, char **argv, char **envp)
 			exit(0);
 		}
 		g_exit = check_error_cod(&shell);
-		// printf("MAIN 1= %d\n", g_exit);
-		// g_exit = parse(shell.lst.split);
-		printf("MAIN = %d\n", g_exit);
 	}
 	return (0);
 }

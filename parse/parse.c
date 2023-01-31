@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:10:54 by mich             ###   ########.fr       */
+/*   Updated: 2023/01/31 17:06:03 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ int	check_pipe(char *string)
 	if (i > 1)
 	{
 		printf("minishell: double pipe is not allowed\n");
-		g_exit = 2;
+		return (2);
 	}
-	printf("CHECK_PIPE = %d\n", g_exit);
-	return (g_exit);
+	return (0);
 }
 
 int	check_redirection(char *string)
@@ -34,15 +33,14 @@ int	check_redirection(char *string)
 	if (i > 2)
 	{
 		printf("minishell: syntax error near unexpected token redirection\n");
-		g_exit = 258;
+		return (258);
 	}
 	if (i > 1 && (string[0] == '>' && string[0] != string[1]))
 	{
 		printf("minishell: redirection >< is not allowed\n");
-		g_exit = 2;
+		return (2);
 	}
-	printf("CHECK_REDIRECTION = %d\n", g_exit);
-	return (g_exit);
+	return (0);
 }
 
 int	check_quote(char *string)
@@ -53,16 +51,15 @@ int	check_quote(char *string)
 	if (i == 2)
 	{
 		printf("minishell: command not found\n");
-		g_exit = 127;
+		return (127);
 	}
 	if ((string[0] == 34 && string[i - 1] != 34)
 		|| (string[0] == 39 && string[i - 1] != 39))
 	{
 		printf("minishell: quote not closed\n");
-		g_exit = 2;
+		return (2);
 	}
-	printf("CHECK_QUOTE = %d\n", g_exit);
-	return (g_exit);
+	return (0);
 }
 
 int	check_parameter(char *string, char c)
@@ -73,8 +70,7 @@ int	check_parameter(char *string, char c)
 		return (g_exit = check_redirection(string));
 	if (c == 34 || c == 39)
 		return (g_exit = check_quote(string));
-	printf("CHECK_PARAMETER = %d\n", g_exit);
-	return (g_exit);
+	return (0);
 }
 
 int	parse(char **string)
@@ -84,7 +80,7 @@ int	parse(char **string)
 	if (string[0][0] == '|')
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
-		g_exit = 258;
+		return (258);
 	}
 	i = 0;
 	while (string[++i])
@@ -92,9 +88,7 @@ int	parse(char **string)
 		if (string[i][0] == '|' || string[i][0] == '<'
 			|| string[i][0] == '>' || string[i][0] == 34
 			|| string[i][0] == 39)
-			g_exit = check_parameter(string[i], string[i][0]);
-		printf("WHILE PARSE = %d\n", g_exit);
+			return (g_exit = check_parameter(string[i], string[i][0]));
 	}
-	printf("PARSE = %d\n", g_exit);
-	return (g_exit);
+	return (0);
 }
