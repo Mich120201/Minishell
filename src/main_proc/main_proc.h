@@ -24,4 +24,16 @@ void	write_word(char *dest, char *src);
 int		write_split(char **split, char *str);
 char	**split_cmd(char const *s);
 
+
+
+
+char	*ft_pwd(void);
+void	ft_unset(int argc, char **argv, char **current);
+char	**sort(char **sorting);
+void	ft_export(int argc, char **argv, t_shell shell);
+void	ft_exit(int argc, char **argv, char **current);
+void	ft_env(char **current);
+void	ft_echo(int argc, char **argv, t_shell shell);
+void	short_echo(char **argv, t_shell shell)
+void	ft_cd(int argc, char **argv, t_shell shell);
 #endif
