@@ -11,27 +11,35 @@
 /* ************************************************************************** */
 
 #include "src.h"
-
-void	free_struct2(t_shell *shell, int i)
+void	free_str(char **str)
 {
+	int i;
 	i = -1;
-	while (shell->exp.sort_env[++i])
+	while(str[++i])
 	{
-		free(shell->exp.sort_env[i]);
-		shell->exp.sort_env[i] = NULL;
+		free(str[i]);
+		str[i] = NULL;
 	}
-	i = -1;
-	while (shell->lst.executor[++i])
-	{
-		free(shell->lst.executor[i]);
-		shell->lst.executor[i] = NULL;
-	}
-	i = -1;
-	while (shell->lst.expansion[++i])
-	{
-		free(shell->lst.expansion[i]);
-		shell->lst.expansion[i] = NULL;
-	}
+	free(str);
+}
+
+void	free_struct2(t_shell *shell)
+{
+	if (shell->env.current)
+		free_str(shell->env.current);
+	shell->env.current = NULL;
+	if (shell->exp.sort_env)
+		free_str(shell->exp.sort_env);
+	shell->exp.sort_env = NULL;
+	if (shell->cd.oldpwd)
+		free(shell->cd.oldpwd);
+	shell->cd.oldpwd = NULL;
+	if (shell->cd.pwd2)
+		free(shell->cd.pwd2);
+	shell->cd.pwd2 = NULL;
+	if (shell->cd.pwd)
+		free(shell->cd.pwd);
+	shell->cd.pwd = NULL;
 }
 
 /**
@@ -43,24 +51,32 @@ void	free_struct2(t_shell *shell, int i)
  */
 void	free_struct(t_shell *shell)
 {
-	int	i;
-
-	i = -1;
-	while (shell->env.current[++i])
-	{
-		free(shell->env.current[i]);
-		shell->env.current[i] = NULL;
-	}
-	free(shell->env.current);
+	if(shell->lst.split)
+		free_str(shell->lst.split);
+	shell->lst.split = NULL;
+	if(shell->lst.error)
+		free_str(shell->lst.error);
+	shell->lst.error = NULL;
+	if(shell->lst.executor)
+		free_str(shell->lst.executor);
+	shell->lst.executor = NULL;
+	if (shell->lst.expansion)
+		free_str(shell->lst.expansion);
+	shell->lst.expansion = NULL;
+	if (shell->lst.file)
+		free_str(shell->lst.file);
+	shell->lst.file = NULL;
+	if (shell->lst.pipe)
+		free_str(shell->lst.pipe);
+	shell->lst.pipe = NULL;
+	if (shell->lst.redirection)
+		free_str(shell->lst.redirection);
+	shell->lst.redirection = NULL;
 	free(shell->lst.input);
-	i = -1;
-	while (shell->lst.split[++i])
-	{
-		free(shell->lst.split[i]);
-		shell->lst.split[i] = NULL;
-	}
-	free(shell->lst.split);
-	free_struct2(shell, i);
+	shell->lst.input = NULL;
+	if (shell->lst.doc)
+		free(shell->lst.doc);
+	shell->lst.doc = NULL;
 }
 
 int	check_error_cod(t_shell *shell)

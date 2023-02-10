@@ -12,7 +12,7 @@
 
 #include "exit.h"
 
-void	ft_exit(char **current)
+void	ft_exit(char **current, t_shell *shell)
 {
 	int		i;
 	int		j;
@@ -27,6 +27,9 @@ void	ft_exit(char **current)
 			j--;
 			j += '0';
 			current[i][6] = j;
+			free_struct(shell);
+			free_struct2(shell);
+			rl_clear_history();
 			exit(printf("exit\n"));
 		}
 	}
