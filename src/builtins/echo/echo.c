@@ -28,6 +28,11 @@ void	ft_echo(t_shell *shell)
 {
 	shell->echo.i = 1;
 	shell->echo.j = 0;
+	if(!shell->lst.executor[1])
+		{
+			printf("\n");
+			return;
+		}
 	while (shell->echo.j < 1)
 	{
 		if (strncmp(shell->lst.executor[shell->echo.i], "-n", 3) == 0)
