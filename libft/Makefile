@@ -60,6 +60,7 @@ SRC_LIBFT = lib/ft_atoi.c \
 	  lib/ft_lstnew.c \
 	  lib/ft_lstsize.c \
 	  lib/ft_count_arraystr.c \
+	  lib/ft_free_str.c \
 
 SRC_PRINTF = printf/ft_printf.c \
 				printf/ft_printf_utils.c \

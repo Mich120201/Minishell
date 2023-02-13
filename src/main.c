@@ -61,13 +61,11 @@ void	free_struct2(t_shell *shell)
 {
 	if (shell->env.current)
 	{
-		free_str(shell->env.current);
-		shell->env.current = NULL;
+		ft_free_str(shell->env.current);
 	}
 	if (shell->exp.sort_env)
 	{	
-		free_str(shell->exp.sort_env);
-		shell->exp.sort_env = NULL;
+		ft_free_str(shell->exp.sort_env);
 	}
 	if (shell->cd.oldpwd)
 	{	
@@ -96,31 +94,40 @@ void	free_struct2(t_shell *shell)
 void	free_struct(t_shell *shell)
 {
 	if(shell->lst.split)
-		free_str(shell->lst.split);
-	shell->lst.split = NULL;
+	{
+			ft_free_str(shell->lst.split);
+	}
 	if(shell->lst.error)
-		free_str(shell->lst.error);
-	shell->lst.error = NULL;
+	{
+		ft_free_str(shell->lst.error);
+	}
 	if(shell->lst.executor)
-		free_str(shell->lst.executor);
-	shell->lst.executor = NULL;
+	{
+		ft_free_str(shell->lst.executor);
+	}
 	if (shell->lst.expansion)
-		free_str(shell->lst.expansion);
-	shell->lst.expansion = NULL;
+	{
+		ft_free_str(shell->lst.expansion);
+	}
 	if (shell->lst.file)
-		free_str(shell->lst.file);
-	shell->lst.file = NULL;
+	{
+		ft_free_str(shell->lst.file);
+	}
 	if (shell->lst.pipe)
-		free_str(shell->lst.pipe);
-	shell->lst.pipe = NULL;
+	{
+		ft_free_str(shell->lst.pipe);
+	}
 	if (shell->lst.redirection)
-		free_str(shell->lst.redirection);
-	shell->lst.redirection = NULL;
+	{
+		ft_free_str(shell->lst.redirection);
+	}
 	free(shell->lst.input);
 	shell->lst.input = NULL;
 	if (shell->lst.doc)
+	{
 		free(shell->lst.doc);
-	shell->lst.doc = NULL;
+		shell->lst.doc = NULL;
+	}
 }
 
 int	check_error_cod(t_shell *shell)

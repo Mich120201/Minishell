@@ -68,5 +68,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 int 	ft_count_arraystr(char **count);
+void    ft_free_str(char **str);
 
 #endif

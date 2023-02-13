@@ -25,11 +25,9 @@ void	get_env(char **envp, t_shell *env_list)
 	int	i;
 
 	c = -1;
-	i = -1;
-	while (envp[++i])
-		;
+	i = ft_count_arraystr(envp);
 	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
-	while (envp[++c])
+	while (++c < i)
 	{
 		env_list->env.current[c] = ft_strdup(envp[c]);
 	}
