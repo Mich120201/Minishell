@@ -11,6 +11,34 @@
 /* ************************************************************************** */
 
 #include "src.h"
+
+void	set_null(t_shell *shell)
+{
+	shell->lst.split = NULL;
+	shell->lst.error = NULL;
+	shell->lst.executor = NULL;
+	shell->lst.expansion = NULL;
+	shell->lst.file = NULL;
+	shell->lst.pipe = NULL;
+	shell->lst.redirection = NULL;
+	shell->lst.input = NULL;
+	shell->lst.doc = NULL;
+	shell->lst.split = NULL;
+	shell->lst.error = NULL;
+	shell->lst.executor = NULL;
+	shell->lst.expansion = NULL;
+	shell->lst.file = NULL;
+	shell->lst.pipe = NULL;
+	shell->lst.redirection = NULL;
+	shell->lst.input = NULL;
+	shell->lst.doc = NULL;
+	shell->env.current = NULL;
+	shell->exp.sort_env = NULL;
+	shell->cd.oldpwd = NULL;
+	shell->cd.pwd2 = NULL;
+	shell->cd.pwd = NULL;
+}
+
 void	free_str(char **str)
 {
 	int i;
@@ -124,6 +152,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	g_exit = 0;
+	set_null(&shell);
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);

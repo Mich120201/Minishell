@@ -23,5 +23,6 @@
 
 void	free_struct(t_shell *shell);
 void	free_struct2(t_shell *shell);
+void	set_null(t_shell *shell);
 
 #endif
