@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:15:42 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:16:02 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 15:50:31 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	ft_env(char **current)
 		if (strchr(current[i], '=') != NULL)
 			printf("%s\n", current[i]);
 	}
+	current[i] = NULL;
 }

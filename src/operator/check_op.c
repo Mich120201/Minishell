@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 17:43:43 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 15:49:21 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	expansion(char *expansion, char **current)
 {
 	int		i;
 	int		j;
+	int		k;
 	int		pos;
 	char	*str;
 
@@ -66,8 +67,11 @@ void	expansion(char *expansion, char **current)
 		str[++i] = expansion[j];
 	str[++i] = '\0';
 	i = -1;
-	while (current[++i])
+	k = ft_count_arraystr(current);
+	printf("%d\n",k);
+	while (++i <= k)
 	{
+		printf("i = {%d}\n", i);
 		pos = ft_strchrp(current[i], '=');
 		if (ft_strncmp(current[i], str, pos) == 0)
 		{
@@ -75,6 +79,7 @@ void	expansion(char *expansion, char **current)
 			while (current[i][++pos])
 				expansion[++j] = current[i][pos];
 			expansion[++j] = '\0';
+			break;
 		}
 	}
 }
@@ -103,3 +108,5 @@ int	check_operator(t_shell *shell)
 // shell->lst.pipe = split_pipe(shell->lst.input);
 // if (shell->lst.pipe[1] != NULL)
 // 	ft_pipe();
+
+

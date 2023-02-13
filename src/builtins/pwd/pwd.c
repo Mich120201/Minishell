@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:24:24 by mich              #+#    #+#             */
-/*   Updated: 2023/02/08 11:47:38 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 15:03:15 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ void	pwd(void)
 	s = (char *)malloc(100 * sizeof(char));
 	printf("%s\n", getcwd(s, 100));
 	free(s);
-	s = NULL;
 }

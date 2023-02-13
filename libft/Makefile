@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
+#    By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/13 11:10:21 by kzak              #+#    #+#              #
-#    Updated: 2022/09/19 10:38:42 by mvolpi           ###   ########.fr        #
+#    Updated: 2023/02/13 15:39:53 by lorenzodima      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC_LIBFT = lib/ft_atoi.c \
 	  lib/ft_lstmap.c \
 	  lib/ft_lstnew.c \
 	  lib/ft_lstsize.c \
+	  lib/ft_count_arraystr.c \
 
 SRC_PRINTF = printf/ft_printf.c \
 				printf/ft_printf_utils.c \

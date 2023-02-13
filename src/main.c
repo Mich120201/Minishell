@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/09 17:43:09 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 15:24:01 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,48 @@ void	set_null(t_shell *shell)
 void	free_str(char **str)
 {
 	int i;
+	int j;
 	i = -1;
-	while(str[++i])
+	j = -1;
+	while (str[++i])
+		;
+	while(j == i)
 	{
-		free(str[i]);
-		str[i] = NULL;
+		free(str[j]);
+		str[j] = NULL;
+		j++;
 	}
 	free(str);
+	str = NULL;
 }
 
 void	free_struct2(t_shell *shell)
 {
 	if (shell->env.current)
+	{
 		free_str(shell->env.current);
-	shell->env.current = NULL;
+		shell->env.current = NULL;
+	}
 	if (shell->exp.sort_env)
+	{	
 		free_str(shell->exp.sort_env);
-	shell->exp.sort_env = NULL;
+		shell->exp.sort_env = NULL;
+	}
 	if (shell->cd.oldpwd)
+	{	
 		free(shell->cd.oldpwd);
-	shell->cd.oldpwd = NULL;
+		shell->cd.oldpwd = NULL;
+	}
 	if (shell->cd.pwd2)
+	{	
 		free(shell->cd.pwd2);
-	shell->cd.pwd2 = NULL;
+		shell->cd.pwd2 = NULL;
+	}
 	if (shell->cd.pwd)
+	{	
 		free(shell->cd.pwd);
-	shell->cd.pwd = NULL;
+		shell->cd.pwd = NULL;
+	}
 }
 
 /**

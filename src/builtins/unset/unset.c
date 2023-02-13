@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 15:55:42 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:02:18 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_unset(t_shell *shell, char **current)
 				else
 				{
 					free(current[shell->unset.j]);
-					current[shell->unset.j] = NULL;
+
 				}
 			}
 			break ;
@@ -61,7 +61,6 @@ void	ft_unset2(t_shell *shell, char **current)
 				else
 				{
 					free(current[shell->unset.j]);
-					current[shell->unset.j] = NULL;
 				}
 			}
 			break ;
