@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:20:28 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/20 10:32:44 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:59:12 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	get_env(char **envp, t_shell *env_list)
 	{
 		env_list->env.current[c] = ft_strdup(envp[c]);
 	}
+	env_list->env.current[c] = NULL;
 }

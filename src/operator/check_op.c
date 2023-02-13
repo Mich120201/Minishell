@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/13 15:49:21 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/13 16:14:25 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	expansion(char *expansion, char **current)
 	i = -1;
 	k = ft_count_arraystr(current);
 	printf("%d\n",k);
-	while (++i <= k)
+	while (++i < k)
 	{
 		printf("i = {%d}\n", i);
 		pos = ft_strchrp(current[i], '=');
