@@ -15,6 +15,6 @@
 
 # include "../src.h"
 
-void	bho(void);
+int	check_single_pipe(char *str);
 
 #endif

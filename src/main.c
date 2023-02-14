@@ -127,7 +127,6 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);
-		bho();
 		if (g_exit == 0)
 			check_operator(&shell);
 		dup2(i, STDOUT_FILENO);
