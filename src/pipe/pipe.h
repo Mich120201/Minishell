@@ -10,11 +10,3 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_H
-# define PIPE_H
-
-# include "../src.h"
-
-int	check_single_pipe(char *str);
-
-#endif

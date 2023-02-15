@@ -95,7 +95,6 @@ int	check_operator(t_shell *shell)
 
 	i = -1;
 	q = -1;
-	check_single_pipe(shell->lst.input);
 	control_exp(shell);
 	q = clean_quote(shell, i);
 	if (q == 0 || q == 3)

@@ -74,6 +74,8 @@ int	executor(t_shell *shell)
 		ft_export(shell);
 	else if (strncmp(shell->lst.executor[0], "unset", 6) == 0)
 		ft_unset (shell, shell->env.current);
+	else	
+		commands(shell);
 	return (0);
 }
 

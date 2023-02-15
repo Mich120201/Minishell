@@ -22,6 +22,8 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 
 SRC_GET_ENV				=	src/get_env/init_env.c
 
+SRC_COMMANDS			=	src/commands/commands.c
+
 SRC_OPERATOR			=	src/operator/check_op.c \
 								src/operator/clean_quote.c \
 								src/operator/delete.c \
@@ -29,8 +31,6 @@ SRC_OPERATOR			=	src/operator/check_op.c \
 								src/operator/utils.c
 
 SRC_PARSE				=	src/parse/parse.c
-
-SRC_PIPE				=	src/pipe/pipe.c
 
 SRC_SIGNALS				=	src/signals/signals.c
 
@@ -56,9 +56,9 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_GET_ENV:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_OPERATOR:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PARSE:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_PIPE:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_SIGNALS:.c=.o}) 
+						$(addprefix $(OBJS_DIR)/, ${SRC_SIGNALS:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_COMMANDS:.c=.o}) 
 
 OBJS_DIR			= objs
 

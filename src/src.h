@@ -22,6 +22,7 @@
 # include "operator/operator.h"
 # include "signals/signals.h"
 # include "pipe/pipe.h"
+# include "commands/commands.h"
 
 void	free_struct(t_shell *shell);
 
