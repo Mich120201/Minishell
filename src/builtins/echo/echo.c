@@ -28,21 +28,26 @@ void	ft_echo(t_shell *shell)
 {
 	shell->echo.i = 1;
 	shell->echo.j = 0;
-	while (shell->echo.j < 1)
+	if(shell->lst.executor[1] == NULL)
+		printf("\n");
+	else
 	{
-		if (strncmp(shell->lst.executor[shell->echo.i], "-n", 3) == 0)
+		while (shell->echo.j < 1)
 		{
-			shell->echo.i++;
-			while ((strncmp(shell->lst.executor[shell->echo.i], "-n", 3) == 0))
-					shell->echo.i++;
-			while (shell->lst.executor[shell->echo.i])
+			if (strncmp(shell->lst.executor[shell->echo.i], "-n", 3) == 0)
 			{
-				printf("%s ", shell->lst.executor[shell->echo.i]);
 				shell->echo.i++;
+				while ((strncmp(shell->lst.executor[shell->echo.i], "-n", 3) == 0))
+						shell->echo.i++;
+				while (shell->lst.executor[shell->echo.i])
+				{
+					printf("%s ", shell->lst.executor[shell->echo.i]);
+					shell->echo.i++;
+				}
 			}
+			else
+				short_echo(shell);
+			shell->echo.j++;
 		}
-		else
-			short_echo(shell);
-		shell->echo.j++;
 	}
 }
