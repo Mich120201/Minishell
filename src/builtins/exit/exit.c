@@ -33,13 +33,16 @@ void	ft_exit(t_shell *shell)
 					printf("exit\n");
 					printf("minishell: exit: %s: numeric argument required\n", \
 					shell->lst.executor[1]);
+					free(shell->lst.input);
 					exit(1);
 				}
 			}
 		}
 		printf("exit\n");
+		free(shell->lst.input);
 		exit(ft_atoi(shell->lst.executor[1]));
 	}
 	printf("exit\n");
+	free(shell->lst.input);
 	exit(shell->old_g_exit);
 }
