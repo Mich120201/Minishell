@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/06 11:09:46 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:30:24 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ char	**split_pipe(char const *s)
 	if (!(save_split(rtn, (char *) s)))
 	{
 		w = -1;
-		while (rtn[++w])
-			free(rtn + w);
+		while (rtn[w])
+			free(rtn[w]);
 		free(rtn);
 	}
 	rtn[w] = 0;

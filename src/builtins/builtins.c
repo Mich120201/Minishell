@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 11:24:53 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:23:37 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,46 @@
 
 void	delete_file2(t_shell *shell, int j)
 {
-	while (shell->lst.executor[j])
-	{
-		free(shell->lst.executor[j]);
-		if (shell->lst.executor[j + 1] != NULL)
-		{
-			shell->lst.executor[j]
-				= ft_strdup(shell->lst.executor[j + 1]);
-			j++;
-		}
-		else
-		{
-			shell->lst.executor[j] = NULL;
-		}
-	}
-}
-
-void	delete_file(t_shell *shell)
-{
-	int	i;
-	int	k;
-	int	j;
-
+	int i;
+	int k;
+	int j;
+	
 	k = -1;
-	while (shell->lst.delete_str[++k])
+	while(shell->lst.delete_str[++k])
 	{
 		i = -1;
-		while (shell->lst.executor[++i])
+		while(shell->lst.executor[++i])
 		{
-			if (ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k],
-					ft_strlen(shell->lst.executor[i])) == 0)
+			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
 			{
-				j = i;
-				delete_file2(shell, j);
+				j = i ;
+				while(shell->lst.executor[j])
+				{
+					free(shell->lst.executor[j]);
+					if(shell->lst.executor[j + 1] != NULL)
+					{
+						shell->lst.executor[j] = ft_strdup(shell->lst.executor[j + 1]);
+						j++;
+					}
+					else
+					{
+						shell->lst.executor[j] = NULL;
+					}
+				}
 			}
 		}
 	}
+	ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 }
 
 int	check_file(t_shell *shell)
 {
-	if (shell->lst.redirection == NULL)
+	if(shell->check_mix_red == 1)
+		delete_file(shell);
+	if(shell->lst.redirection == NULL || shell->redirection_id == 2)
+	{
 		return (1);
+	}
 	else
 	{
 		delete_file(shell);

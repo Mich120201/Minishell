@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 11:10:15 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:30:45 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ char	**split_redirection(char const *s)
 	if (!(stamp_split(rtn, (char *) s)))
 	{
 		w = -1;
-		while (rtn[++w])
-			free(rtn + w);
+		while (rtn[w])
+			free(rtn[w]);
 		free(rtn);
 	}
 	rtn[w] = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/06 15:43:35 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:21:23 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,17 @@ typedef struct s_shell
 	t_echo	echo;
 	t_exp	exp;
 	t_unset	unset;
+	char	*save_redirection;
 	int		old_g_exit;
 	int		stdin;
 	int		stdout;
 	int		out_pipe;
 	int		single_quote;
 	int		here_pipe;
-	int		dollar;
-	int		flag;
+	int		redirection_id;
+	int		check_mix_red;
+	int		redirection_out;
+	int		here_cat;
 }				t_shell;
 
 #endif
