@@ -62,6 +62,7 @@ int	ft_fork(t_shell *shell, char *str)
 int	ab_path(t_shell	*shell)
 {
 	int	pid;
+	int	status;
 
 	if (!access(shell->lst.executor[0], F_OK))
 	{
@@ -74,9 +75,14 @@ int	ab_path(t_shell	*shell)
 			if (g_exit == 130)
 				exit(0);
 		}
-		waitpid(pid, &g_exit, 0);
-		if (WIFEXITED(g_exit))
-			return (g_exit = WEXITSTATUS(g_exit));
+		else if (pid > 0)
+		{
+			waitpid(pid, &status, 0);
+			if (WIFEXITED(status))
+				return (1);
+		}
+		else
+			exit(EXIT_FAILURE);
 	}
 	return (0);
 }

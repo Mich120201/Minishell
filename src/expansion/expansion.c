@@ -101,6 +101,12 @@ void	expansion(t_shell *shell)
 	shell->exp.i = -1;
 	while (shell->lst.executor[++shell->exp.i])
 	{
+		if (ft_strncmp(shell->lst.executor[shell->exp.i], "$?", 2) == 0)
+		{
+			free(shell->lst.executor[shell->exp.i]);
+			shell->lst.executor[shell->exp.i] = ft_itoa(shell->old_g_exit);
+		}
+		else
 		j = -1;
 		while (shell->lst.executor[shell->exp.i][++j])
 		{

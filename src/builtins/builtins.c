@@ -73,7 +73,8 @@ int	control_g_exit(t_shell *shell)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
 		shell->old_g_exit = 127;
-		return (g_exit);
+		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
+		return (1);
 	}
 	return (0);
 }
