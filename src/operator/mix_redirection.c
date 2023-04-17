@@ -30,9 +30,8 @@ int ft_strtok_loop(char *next_token,const char *delim, t_shell *shell)
 
 char *ft_strtok(char *str, const char *delim, t_shell *shell) 
 {
-	static char *next_token;
+	static char *next_token = NULL;
 
-	next_token = NULL;
 	if (str != NULL) 
 		next_token = str;
 	else if (next_token == NULL) 
@@ -60,7 +59,6 @@ void	control_double_redirection(t_shell *shell)
 {
 	if (ft_strncmp(shell->redirection.token, ">>", 2) == 0)
 	{
-		printf("quo\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -90,7 +88,6 @@ void	control_redirection(t_shell *shell)
 {
 	if (ft_strncmp(shell->redirection.token, "<", 1) == 0)
 	{
-		printf("qui\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -129,7 +126,7 @@ void	mix_redirection(t_shell *shell)
 	{
 		control_redirection(shell);
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
-		// printf("%s\n", shell->redirection.token);
+		//printf("%s\n", shell->redirection.token);
 		if (shell->redirection.token != NULL)
 		{
 			if (ft_strncmp(shell->redirection.token, ">", 1) != 0 && \
@@ -142,6 +139,7 @@ void	mix_redirection(t_shell *shell)
 	shell->lst.delete_str[shell->redirection.i] = NULL;
 	free(shell->redirection.input);
 	delete_op(shell);
+	printf("shell flag %d\n", shell->redirection.flag);
 	if (shell->redirection.flag != 3)
 		executor(shell);
 }
