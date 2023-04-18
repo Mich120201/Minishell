@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   mix_redirection.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/18 14:48:25 by mich             ###   ########.fr       */
+/*   Created: 2023/04/18 14:29:26 by mich              #+#    #+#             */
+/*   Updated: 2023/04/18 14:46:20 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#ifndef MIX_REDIRECTION_H
+# define MIX_REDIRECTION_H
 
-void	delete_op(t_shell *shell)
-{
-	int	i;
-	int	check_quote;
+# include "../../src.h"
 
-	i = -1;
-	check_quote = 0;
-	while (shell->lst.input[++i])
-	{
-		if (is_separator(shell->lst.input[i]) == -1)
-		{
-			if (check_quote == 0)
-				check_quote = 1;
-			else
-				check_quote = 0;
-		}
-		if (is_separator(shell->lst.input[i]) > 1 && check_quote == 0)
-			shell->lst.input[i] = ' ';
-	}
-}
+/*mix_redirection_utils.c*/
+void	print_cat_array(t_shell *shell);
+/*mix_redirection.c*/
+void	mix_redirection(t_shell *shell);
+
+#endif

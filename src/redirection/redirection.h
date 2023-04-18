@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/18 14:48:25 by mich             ###   ########.fr       */
+/*   Created: 2023/04/18 14:27:30 by mich              #+#    #+#             */
+/*   Updated: 2023/04/18 14:37:54 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#ifndef REDIRECTION_H
+# define REDIRECTION_H
 
-void	delete_op(t_shell *shell)
-{
-	int	i;
-	int	check_quote;
+# include "../src.h"
+# include "mix_redirection/mix_redirection.h"
+# include "single_redirection/single_redirection.h"
 
-	i = -1;
-	check_quote = 0;
-	while (shell->lst.input[++i])
-	{
-		if (is_separator(shell->lst.input[i]) == -1)
-		{
-			if (check_quote == 0)
-				check_quote = 1;
-			else
-				check_quote = 0;
-		}
-		if (is_separator(shell->lst.input[i]) > 1 && check_quote == 0)
-			shell->lst.input[i] = ' ';
-	}
-}
+#endif

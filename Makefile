@@ -35,20 +35,22 @@ SRC_GET_ENV				=	src/get_env/init_env.c
 
 SRC_OPERATOR			=	src/operator/check_op_utils.c \
 								src/operator/check_op.c \
-								src/operator/clean_quote.c \
-								src/operator/cln_quote_utils.c \
 								src/operator/delete.c \
-								src/operator/redirection.c \
-								src/operator/redirection_utils.c \
-								src/operator/utils.c \
-								src/operator/mix_redirection_utils.c \
-								src/operator/mix_redirection.c 
+								src/operator/utils.c
 
 SRC_PARSE				=	src/parse/parse_utils.c \
 							src/parse/parse.c
 
 SRC_PIPE				=	src/pipe/pipe.c \
 							src/pipe/pipe_utils.c
+
+SRC_QUOTE				=	src/quote/clean_quote.c \
+							src/quote/cln_quote_utils.c
+
+SRC_REDIRECTION			=	src/redirection/mix_redirection/mix_redirection_utils.c \
+							src/redirection/mix_redirection/mix_redirection.c \
+							src/redirection/single_redirection/redirection_utils.c \
+							src/redirection/single_redirection/redirection.c
 
 SRC_SIGNALS				=	src/signals/signals.c
 
@@ -81,7 +83,9 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_OPERATOR:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PARSE:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PIPE:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_QUOTE:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_REDIRECTION:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_SIGNALS:.c=.o})	\
 						$(addprefix $(OBJS_DIR)/, ${SRC_FREE:.c=.o})
 

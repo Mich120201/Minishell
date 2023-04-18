@@ -6,11 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:08:37 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:17:46 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/18 14:50:34 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#include "quote.h"
 
 int	loop_quote(t_shell *shell, int i)
 {

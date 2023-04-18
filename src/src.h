@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 11:26:04 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/18 14:50:01 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include "expansion/expansion.h"
 # include "exp_redirection/exp_red.h"
 # include "free/free.h"
+# include "redirection/redirection.h"
+# include "quote/quote.h"
 
 int		loop(t_shell *shell);
 void	reset_var(t_shell *shell);

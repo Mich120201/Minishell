@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 09:26:49 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:28:56 by mich             ###   ########.fr       */
+/*   Created: 2023/04/18 14:32:35 by mich              #+#    #+#             */
+/*   Updated: 2023/04/18 15:07:10 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#include "mix_redirection.h"
 
 int ft_strtok_loop(char *next_token,const char *delim, t_shell *shell)
 {
@@ -60,7 +60,6 @@ void	control_double_redirection(t_shell *shell)
 {
 	if (ft_strncmp(shell->redirection.token, ">>", 2) == 0)
 	{
-		printf("quo\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -90,7 +89,6 @@ void	control_redirection(t_shell *shell)
 {
 	if (ft_strncmp(shell->redirection.token, "<", 1) == 0)
 	{
-		printf("qui\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -129,7 +127,6 @@ void	mix_redirection(t_shell *shell)
 	{
 		control_redirection(shell);
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
-		// printf("%s\n", shell->redirection.token);
 		if (shell->redirection.token != NULL)
 		{
 			if (ft_strncmp(shell->redirection.token, ">", 1) != 0 && \

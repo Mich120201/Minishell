@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:22:53 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/18 15:06:44 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ int	check_red(char *input, t_shell *shell, int i)
 	while (input[++i])
 	{
 		check_double_red(shell, input, i);
-		if (shell->redirection_id == 0)
-			check_single_red(shell, input, i);
+		check_single_red(shell, input, i);
 	}
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
 		redirection(shell);

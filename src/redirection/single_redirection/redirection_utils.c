@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:34 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/17 12:46:40 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/18 14:40:04 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#include "single_redirection.h"
 
 int	print_here_doc(t_shell *shell, char *redirection)
 {

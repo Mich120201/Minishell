@@ -6,11 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:23:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/18 14:41:32 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#include "single_redirection.h"
 
 void	red_out(int count_redirection, t_shell *shell, \
 	int count_delete_str, int j)

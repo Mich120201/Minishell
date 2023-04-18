@@ -6,11 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:17:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/18 14:50:40 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operator.h"
+#include "quote.h"
 
 void	clean_double(t_shell *shell)
 {
