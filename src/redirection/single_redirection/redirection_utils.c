@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:34 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/18 14:40:04 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/18 15:15:14 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ int	print_heredoc_cat(t_shell *shell, int j)
 	shell->lst.doc = NULL;
 	shell->check_signal_d = 0;
 	return (0);
+}
+
+void	init_var_red(t_shell *shell)
+{
+	shell->redirection.count_delete_str = 0;
+	shell->redirection.j = 0;
+	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
+	shell->do_redirection = 1;
 }
