@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 11:26:04 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/19 09:28:05 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../h_file/minishell.h"
 # include "split/split.h"
 # include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
 # include "builtins/builtins.h"
 # include "parse/parse.h"
 # include "operator/operator.h"

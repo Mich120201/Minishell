@@ -3,8 +3,6 @@ NAME := minishell
 SRC						=	src/main.c \
 							src/reset.c
 
-SRC_ARR					=	src/arr_utils/arr_add_back.c
-
 SRC_BUILTINS			=	src/builtins/builtins.c
 
 SRC_CD					=	src/builtins/cd/cd.c
@@ -65,7 +63,6 @@ SRC_FREE				=	src/free/free.c
 FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 
 OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_ARR:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_BUILTINS:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_CD:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_ECHO:.c=.o}) \

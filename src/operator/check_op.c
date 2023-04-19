@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:22:53 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/19 10:29:32 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,20 +122,42 @@ void	redirection(t_shell *shell)
 	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 }
 
+void	change_str(t_shell *shell)
+{
+	int	i;
+
+	free(shell->lst.input);
+	shell->lst.input = ft_strjoin(shell->lst.redirection[0], " ");
+	shell->lst.input = ft_strjoinfree(shell->lst.input, shell->lst.redirection[1]);
+	i = 1;
+	while (shell->lst.redirection[++i])
+	{
+		shell->lst.input = ft_strjoinfree(shell->lst.input, " ");
+		shell->lst.input = ft_strjoinfree(shell->lst.input, shell->lst.redirection[i]);
+	}
+	// shell->lst.input = ft_strjoin(shell->lst.igit è
+	printf("input lst 1 = %s\n", shell->lst.input);
+}
+
 int	check_red(char *input, t_shell *shell, int i)
 {
 	i = -1;
 	shell->redirection_id = 0;
-	shell->check_mix_red = 0;
+	shell->check_mix_red = 1;
 	while (input[++i])
 	{
 		i = check_double_red(shell, input, i);
-		check_single_red(shell, input, i);
+		if (shell->redirection_id > 0)
+			check_single_red(shell, input, i);
 	}
-	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
-		redirection(shell);
-	if (shell->check_mix_red == 1)
+	// if (shell->redirection_id > 0 && shell->check_mix_red != 1)
+	// 	redirection(shell);
+	if (shell->redirection_id > 0)
+	{
+		// shell->lst.redirection = split_cmd(shell->lst.input);
+		// change_str(shell);
 		mix_redirection(shell);
+	}
 	return (shell->redirection_id);
 }
 

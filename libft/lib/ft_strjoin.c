@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 10:34:12 by mvolpi            #+#    #+#             */
-/*   Updated: 2022/09/19 10:54:23 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/19 10:03:05 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i = 0;
 		while (s2[i])
 			str[j++] = s2[i++];
-		str[j] = 0;
+		str[j] = '\0';
 		return (str);
 	}
 	return (0);

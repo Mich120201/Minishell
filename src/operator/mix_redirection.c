@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:26:49 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:28:56 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/19 09:55:31 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ char *ft_strtok(char *str, const char *delim, t_shell *shell)
 
 void	control_double_redirection(t_shell *shell)
 {
-	printf("token2 %s\n", shell->redirection.token);
 	if (ft_strncmp(shell->redirection.token, ">>", 2) == 0)
 	{
-		printf("ciao\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -89,7 +87,6 @@ void	control_redirection(t_shell *shell)
 {
 	if (ft_strncmp(shell->redirection.token, "<", 1) == 0)
 	{
-		printf("qui\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -117,6 +114,7 @@ void	control_redirection(t_shell *shell)
 
 void	mix_redirection(t_shell *shell)
 {
+	printf("input lst = %s\n", shell->lst.input);
 	shell->redirection.input = ft_strdup(shell->lst.input);
 	shell->redirection.flag = 0;
 	shell->redirection.token = ft_strtok(shell->redirection.input, " ", shell);
@@ -124,11 +122,12 @@ void	mix_redirection(t_shell *shell)
 		shell->redirection.flag = 1;
 	shell->lst.delete_str = (char **)malloc(sizeof(char *) * 4000);
 	shell->redirection.i = 0;
+	printf("input = %s\n", shell->redirection.input);
 	while (shell->redirection.token != NULL)
 	{
+		printf("%s\n", shell->redirection.token);
 		control_redirection(shell);
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
-		// printf("%s\n", shell->redirection.token);
 		if (shell->redirection.token != NULL)
 		{
 			if (ft_strncmp(shell->redirection.token, ">", 1) != 0 && \
