@@ -23,7 +23,7 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 SRC_CMD					=	src/commands/commands.c \
 							src/commands/cmd_utils.c
 
-SRC_EXP_RED			=		src/exp_redirection/exp_red_utils.c \
+SRC_EXP_RED				=	src/exp_redirection/exp_red_utils.c \
 							src/exp_redirection/exp_red.c
 
 SRC_EXPANSION			=	src/expansion/expansion_utils.c \
